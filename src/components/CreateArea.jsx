@@ -14,7 +14,7 @@ function CreateArea(props) {
   function handleChange(event) {
     const { name, value } = event.target;
 
-    setNote(prevNote => {
+    setNote((prevNote) => {
       return {
         ...prevNote,
         [name]: value
@@ -23,12 +23,13 @@ function CreateArea(props) {
   }
 
   function submitNote(event) {
-    props.onAdd(note);
+    props.onAdd(note); // passed to the App component
     setNote({
+      //clears the previous input of title and content and sets then empty again
       title: "",
       content: ""
     });
-    event.preventDefault();
+    event.preventDefault(); //prevents refreshing of the screen
   }
 
   function expand() {
@@ -38,14 +39,14 @@ function CreateArea(props) {
   return (
     <div>
       <form className="create-note">
-        {isExpanded && (
+        {isExpanded ? (
           <input
             name="title"
             onChange={handleChange}
             value={note.title}
             placeholder="Title"
           />
-        )}
+        ) : null}
 
         <textarea
           name="content"
